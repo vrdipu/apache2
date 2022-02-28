@@ -1,0 +1,16 @@
+---
+# tasks file for apache2
+  - name : update hosts 
+    shell: "apt-get update"
+  - name: install apache on Ubuntu
+    apt: name=apache2  state=latest
+  - name: Start the apache service 
+    service:
+        name: apache2
+        state: started
+  - name: Check the service status 
+    shell: "service apache2 status"
+    register: status
+  - name: print the status
+    debug:
+       var: status.stdout_lines
